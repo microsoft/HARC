@@ -1,0 +1,35 @@
+model_id: meta-llama/Llama-3.1-8B-Instruct
+out_dir: runs/harc_llama3.1_8b
+
+# batch
+micro_batch_harmful: 6
+micro_batch_harmless: 4
+micro_batch_pseudo: 2
+grad_accum: 2
+
+# optim
+lr: 1.0e-4
+warmup: 100
+max_steps: 400      # paper checkpoint step (K stays at 2; ramp at 1000 not reached)
+
+# lora
+lora_r: 32
+lora_alpha: 64
+
+# losses
+lambda_couple: 1.0          # prompt-side geometric coupling
+lambda_couple_resp: 1.0     # response-side geometric coupling (shared-helpful baseline)
+lambda_kl: 10.0
+lambda_ce: 1.0
+coupling_margin: 0.5
+response_n_tokens: 32
+enable_response_coupling: true
+
+# directions / layers
+K_recompute: 200
+beta_ema: 0.3
+K_layers_initial: 2
+K_layers_final: 4
+K_ramp_step: 1000
+extract_batch_size: 8
+extract_max_len: 256

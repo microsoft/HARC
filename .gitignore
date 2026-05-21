@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Regenerable artifacts / large files (should never be committed)
+*.pt
+*.svec
+*.safetensors
+figures/_*cache*.pt
+
+# Third-party data — populate data/ locally from original sources (see data/README.md)
+data/*
+!data/README.md
+
+# Logs / scratch
+*.log
+*.out
