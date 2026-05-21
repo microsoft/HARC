@@ -8,7 +8,7 @@
 
 <p align="center"><em>Official implementation of "HARC: Coupling Harmfulness and Refusal Directions for Robust Safety Alignment".</em></p>
 
-HARC is a LoRA safety-alignment method that **couples a model's prompt- and response-side hidden states to its harmfulness (`v_harm`) and refusal (`v_ref`) directions**. This repo covers (1) prompt- and response-side direction extraction and (2) LoRA fine-tuning with the coupling objective (plus the **HARC + DPO** variant).
+HARC is a LoRA safety-alignment method that couples a model's prompt- and response-side hidden states to its harmfulness and refusal directions. This repo covers (1) prompt- and response-side direction extraction and (2) LoRA fine-tuning with the coupling objective (plus the **HARC + DPO** variant).
 
 ## Layout
 ```
