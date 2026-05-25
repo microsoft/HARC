@@ -12,19 +12,19 @@ HARC is a LoRA safety-alignment method that couples a model's prompt- and respon
 
 ## Layout
 ```
-main/                       core training package (run as `python -m main.<module>` from repo root)
+main/                       
   train.py                  HARC training loop (LoRA + coupling + KL + CE)
   directions.py             v_harm / v_ref extraction (prompt & response side)
-  extract_paper_method.py   AdvBench/Alpaca direction extraction (paper method)
+  extract_paper_method.py   AdvBench/Alpaca direction extraction
   losses.py                 coupling / KL / CE losses
-  layers.py                 layer selection (variant-D)
-  data.py  collate.py       data mix (Circuit-Breakers + UltraChat + XSTest) and batching
-  configs/                  training YAMLs (llama3.1_8b.yaml, qwen2_5_7b.yaml)
+  layers.py                 layer selection
+  data.py  collate.py       
+  configs/                  
   baselines/train_dpo.py    DPO trainer (standalone, or HARC+DPO via --init_lora_dir)
 prepare_data.py             download/stage the datasets into data/
-scripts/train.sh            launcher: train both models in parallel (one GPU each)
+scripts/train.sh            launcher: train both models in parallel
 HYPERPARAMS.md              training hyperparameters
-data/                       datasets (git-ignored; populate with prepare_data.py)
+data/                       datasets
 ```
 
 ## Setup
