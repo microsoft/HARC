@@ -1,30 +1,31 @@
-<h1 align="center">HARC: Harmfulness And Refusal Coupling</h1>
+<h1 align="center">HARC: Coupling Harmfulness And Refusal Capabilities for Robust Safety Alignment</h1>
 
 <p align="center">
-  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-b31b1b.svg" alt="Paper"></a>
+  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-b31b1b.svg?logo=arxiv&logoColor=white" alt="Paper"></a>
+  <a href="https://huggingface.co/microsoft/HARC"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow.svg" alt="Hugging Face"></a>
+  <a href="https://github.com/microsoft/HARC"><img src="https://img.shields.io/badge/GitHub-Code-181717.svg?logo=github" alt="GitHub"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
-  <img src="https://img.shields.io/badge/python-3.10+-blue.svg" alt="Python 3.10+">
 </p>
 
-<p align="center"><em>Official implementation of "HARC: Coupling Harmfulness and Refusal Directions for Robust Safety Alignment".</em></p>
+---
 
-HARC is a LoRA safety-alignment method that couples a model's prompt- and response-side hidden states to its harmfulness and refusal directions. This repo covers (1) prompt- and response-side direction extraction and (2) LoRA fine-tuning with the coupling objective (plus the **HARC + DPO** variant).
+**HARC (Harmfulness-And-Refusal Coupling)** is a representation-level safety-alignment method that binds a model's internal harmfulness and refusal directions so that detecting harm reliably triggers refusal at both prompt and response positions in the residual stream. By confining the intervention to this low-dimensional harmfulness–refusal subspace, HARC strengthens robustness to jailbreak attacks while leaving general capability and over-refusal behavior largely intact. This repo provides the official implementation of our paper *HARC: Coupling Harmfulness And Refusal Capabilities for Robust Safety Alignment*.
 
 ## Layout
 ```
 main/                       
   train.py                  HARC training loop (LoRA + coupling + KL + CE)
-  directions.py             v_harm / v_ref extraction (prompt & response side)
+  directions.py             
   extract_paper_method.py   AdvBench/Alpaca direction extraction
-  losses.py                 coupling / KL / CE losses
-  layers.py                 layer selection
+  losses.py                 
+  layers.py                 
   data.py  collate.py       
   configs/                  
-  baselines/train_dpo.py    DPO trainer (standalone, or HARC+DPO via --init_lora_dir)
-prepare_data.py             download/stage the datasets into data/
-scripts/train.sh            launcher: train both models in parallel
-HYPERPARAMS.md              training hyperparameters
-data/                       datasets
+  baselines/train_dpo.py    
+prepare_data.py             
+scripts/train.sh           
+HYPERPARAMS.md              
+data/                      
 ```
 
 ## Setup
@@ -41,7 +42,8 @@ python -m main.train --config main/configs/qwen2_5_7b.yaml    # Qwen2.5-7B-Instr
 # or both in parallel (GPUs 0 and 1 by default):
 bash scripts/train.sh
 ```
-Each config reproduces the checkpoint reported in the paper. A run writes the adapter to `out_dir/final/`, the extracted directions (`directions_base.pt`, `response_directions_base.pt`), and logs (`train_log.jsonl`, `diag_log.jsonl`, `selected_layers.jsonl`).
+
+We provide ready-to-use configs for `Llama-3.1-8B-Instruct` and `Qwen2.5-7B-Instruct`. Each config reproduces the checkpoint reported in the paper. A run writes the adapter to `out_dir/final/`, the extracted directions (`directions_base.pt`, `response_directions_base.pt`), and logs (`train_log.jsonl`, `diag_log.jsonl`, `selected_layers.jsonl`).
 
 ### HARC + DPO
 Apply DPO on top of a trained HARC LoRA (merges the HARC adapter into the base first):
@@ -69,6 +71,13 @@ out = model.generate(ids, max_new_tokens=256)
 print(tok.decode(out[0, ids.shape[1]:], skip_special_tokens=True))
 ```
 
+## Results
+
+<p align="center">
+  <img src="assets/HARC-res.png" alt="HARC main results on Llama-3.1-8B and Qwen-2.5-7B" width="100%">
+</p>
+
+
 ## Ethical Statement
 HARC is a safety-alignment method: its purpose is to make language models more robust to jailbreak attacks and harmful requests while preserving their helpfulness on benign inputs. The datasets used here (Circuit-Breakers, AdvBench, XSTest, etc.) contain harmful prompts solely to train and measure refusal behavior. We release this code to support reproducible safety research and intend it to be used only for defensive purposes, in accordance with the licenses and intended uses of the underlying models and datasets. We do not condone using this work to facilitate harm.
 
@@ -86,22 +95,16 @@ If you find this work useful for your research, please consider citing our paper
 
 ## Contributing
 
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit [Contributor License Agreements](https://cla.opensource.microsoft.com).
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit [Contributor License Agreements](https://cla.opensource.microsoft.com).
 
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.
 
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft
-trademarks or logos is subject to and must follow
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/legal/intellectualproperty/trademarks/usage/general).
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/legal/intellectualproperty/trademarks/usage/general).
+
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+
 Any use of third-party trademarks or logos are subject to those third-party's policies.
