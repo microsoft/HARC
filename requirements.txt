@@ -2,7 +2,7 @@ torch==2.10.0
 transformers==4.57.6
 peft==0.19.1
 datasets==4.8.4
-trl==1.2.0
+trl==1.7.0
 accelerate==1.13.0
 numpy==2.4.4
 PyYAML==6.0.3
