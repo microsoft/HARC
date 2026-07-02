@@ -85,11 +85,11 @@ HARC is a safety-alignment method: its purpose is to make language models more r
 If you find this work useful for your research, please consider citing our paper:
 
 ```bibtex
-@article{harc2026,
-  title   = {HARC: Coupling Harmfulness and Refusal Directions for Robust Safety Alignment},
-  author  = {TODO},
-  journal = {arXiv preprint arXiv:TODO},
-  year    = {2026}
+@article{chua2026harc,
+  title={HARC: Coupling Harmfulness and Refusal Directions for Robust Safety Alignment},
+  author={Chua, Shei Pern and Wu, Fangzhao},
+  journal={arXiv preprint arXiv:2607.00572},
+  year={2026}
 }
 ```
 
