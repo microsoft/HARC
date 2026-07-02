@@ -1,7 +1,7 @@
-<h1 align="center">HARC: Coupling Harmfulness And Refusal Capabilities for Robust Safety Alignment</h1>
+<h1 align="center">HARC: Coupling Harmfulness and Refusal Directions for Robust Safety Alignment</h1>
 
 <p align="center">
-  <a href=""><img src="https://img.shields.io/badge/Paper-arXiv-b31b1b.svg?logo=arxiv&logoColor=white" alt="Paper"></a>
+  <a href="https://arxiv.org/abs/2607.00572"><img src="https://img.shields.io/badge/Paper-arXiv-b31b1b.svg?logo=arxiv&logoColor=white" alt="Paper"></a>
   <a href="https://huggingface.co/microsoft/HARC"><img src="https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Models-yellow.svg" alt="Hugging Face"></a>
   <a href="https://github.com/microsoft/HARC"><img src="https://img.shields.io/badge/GitHub-Code-181717.svg?logo=github" alt="GitHub"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT"></a>
