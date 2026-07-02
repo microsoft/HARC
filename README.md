@@ -9,7 +9,7 @@
 
 ---
 
-**HARC (Harmfulness-And-Refusal Coupling)** is a representation-level safety-alignment method that binds a model's internal harmfulness and refusal directions so that detecting harm reliably triggers refusal at both prompt and response positions in the residual stream. By confining the intervention to this low-dimensional harmfulness–refusal subspace, HARC strengthens robustness to jailbreak attacks while leaving general capability and over-refusal behavior largely intact. This repo provides the official implementation of our paper *HARC: Coupling Harmfulness And Refusal Capabilities for Robust Safety Alignment*.
+**HARC (Harmfulness-And-Refusal Coupling)** is a representation-level safety-alignment method that binds a model's internal harmfulness and refusal directions so that detecting harm reliably triggers refusal at both prompt and response positions in the residual stream. By confining the intervention to this low-dimensional harmfulness–refusal subspace, HARC strengthens robustness to jailbreak attacks while leaving general capability and over-refusal behavior largely intact. This repo provides the official implementation of our paper *HARC: Coupling Harmfulness And Refusal Directions for Robust Safety Alignment*.
 
 ## Layout
 ```
